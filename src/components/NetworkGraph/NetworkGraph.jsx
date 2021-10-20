@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-import { drawGraph } from "./plot";
+import { drawGraph } from "./utils/plot";
 
 const width = window.innerWidth;
 const height = window.innerHeight;

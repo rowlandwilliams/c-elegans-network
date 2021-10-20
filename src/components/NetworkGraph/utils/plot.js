@@ -7,19 +7,14 @@ import {
   forceCollide,
   drag,
 } from "d3";
-import { graphData } from "./data/graphData";
-import {
-  dragended,
-  dragged,
-  dragstarted,
-  ticked,
-} from "./utils/graph-interactions";
+import { graphData } from "../data/graphData";
+import { dragended, dragged, dragstarted, ticked } from "./graph-interactions";
 import {
   linkWidthScale,
   nodeColorScale,
   opacityScale,
   radiusScale,
-} from "./utils/scales";
+} from "./scales";
 
 const { nodes, links } = graphData;
 
@@ -59,7 +54,10 @@ export const drawGraph = (width, height) => {
     .attr("stroke", "grey")
     .attr("fill", (d) => nodeColorScale(d.nConnections))
     .call(
-      drag().on("start", dragstarted).on("drag", dragged).on("end", dragended)
+      drag()
+        .on("start", (event, d) => dragstarted(event, d, simulation))
+        .on("drag", (event, d) => dragged(event, d))
+        .on("end", (event, d) => dragended(event, d, simulation))
     );
 
   simulation.nodes(nodes).on("tick", () => ticked(drawnLinks, drawnNodes));
