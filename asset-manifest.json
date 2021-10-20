@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/c-elegans-network/static/css/main.50c9309e.chunk.css",
+    "main.js": "/c-elegans-network/static/js/main.b175debd.chunk.js",
+    "main.js.map": "/c-elegans-network/static/js/main.b175debd.chunk.js.map",
+    "runtime-main.js": "/c-elegans-network/static/js/runtime-main.ba06b78d.js",
+    "runtime-main.js.map": "/c-elegans-network/static/js/runtime-main.ba06b78d.js.map",
+    "static/js/2.2c83ae33.chunk.js": "/c-elegans-network/static/js/2.2c83ae33.chunk.js",
+    "static/js/2.2c83ae33.chunk.js.map": "/c-elegans-network/static/js/2.2c83ae33.chunk.js.map",
+    "index.html": "/c-elegans-network/index.html",
+    "static/css/main.50c9309e.chunk.css.map": "/c-elegans-network/static/css/main.50c9309e.chunk.css.map",
+    "static/js/2.2c83ae33.chunk.js.LICENSE.txt": "/c-elegans-network/static/js/2.2c83ae33.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ba06b78d.js",
+    "static/js/2.2c83ae33.chunk.js",
+    "static/css/main.50c9309e.chunk.css",
+    "static/js/main.b175debd.chunk.js"
+  ]
+}
