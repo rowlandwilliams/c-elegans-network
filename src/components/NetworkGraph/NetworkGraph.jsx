@@ -1,5 +1,3 @@
-// console.log(Object.keys(data));
-
 import { useEffect } from "react";
 import { graphData } from "./data/graphData";
 import {
@@ -12,8 +10,9 @@ import {
   scaleLinear,
   drag,
   forceCollide,
+  interpolateRdPu,
+  scaleSequential,
 } from "d3";
-import randomColor from "randomcolor";
 
 const { nodes, links } = graphData;
 
@@ -25,8 +24,6 @@ const finalNodes = nodes.map((node) => ({
 }));
 
 console.log(finalNodes);
-const colors = nodes.map((node) => randomColor({ luminosity: "bright" }));
-
 const opacityScale = scaleLinear()
   .domain(extent(links.map((link) => link.weight)))
   .range([0.1, 1]);
@@ -34,6 +31,14 @@ const opacityScale = scaleLinear()
 const radiusScale = scaleLinear()
   .domain(extent(finalNodes.map((node) => node.nConnections)))
   .range([2, 20]);
+
+const linkWidthScale = scaleLinear()
+  .domain(extent(links.map((link) => link.weight)))
+  .range([1, 8]);
+
+const nodeColorScale = scaleSequential(interpolateRdPu).domain(
+  extent(finalNodes.map((node) => node.nConnections))
+);
 
 const width = window.innerWidth;
 const height = window.innerHeight;
@@ -62,7 +67,7 @@ export const NetworkGraph = () => {
       .selectAll("line")
       .data(links)
       .join("line")
-      .attr("stroke-width", (d) => Math.sqrt(d.weight))
+      .attr("stroke-width", (d) => linkWidthScale(d.weight))
       .attr("stroke", "grey")
       .attr("stroke-opacity", (d) => opacityScale(d.weight));
 
@@ -73,7 +78,7 @@ export const NetworkGraph = () => {
       .join("circle")
       .attr("r", (d) => radiusScale(d.nConnections))
       .attr("stroke", "grey")
-      .attr("fill", (d, i) => colors[i])
+      .attr("fill", (d) => nodeColorScale(d.nConnections))
       .call(
         drag().on("start", dragstarted).on("drag", dragged).on("end", dragended)
       );
